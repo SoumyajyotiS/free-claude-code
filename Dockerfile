@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     sudo \
     ca-certificates
 
-# Claude Code + JS tooling
+# Install Claude Code
 RUN npm install -g \
     @anthropic-ai/claude-code \
     pnpm \
@@ -24,14 +24,17 @@ RUN pip install --no-cache-dir uv
 
 COPY . .
 
-# Install FCC dependencies
-RUN uv sync
+# Install dependencies
+RUN uv sync --frozen
 
-# Create persistent workspace
+# IMPORTANT: install FCC package itself
+RUN uv pip install -e .
+
+# Persistent workspace
 RUN mkdir -p /projects
 
 WORKDIR /projects
 
 EXPOSE 8082
 
-CMD ["uv", "run", "fcc-server"]
+CMD ["fcc-server"]
