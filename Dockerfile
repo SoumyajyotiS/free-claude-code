@@ -37,4 +37,4 @@ WORKDIR /projects
 
 EXPOSE 8082
 
-CMD ["fcc-server"]
+CMD ["bash", "-c", "ls -la && find / -name 'fcc*' 2>/dev/null | head -50 && sleep infinity"]
