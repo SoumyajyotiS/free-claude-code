@@ -37,4 +37,4 @@ WORKDIR /projects
 
 EXPOSE 8082
 
-CMD ["bash", "-c", "ls -la && find / -name 'fcc*' 2>/dev/null | head -50 && sleep infinity"]
+CMD ["/app/.venv/bin/fcc-server"]
